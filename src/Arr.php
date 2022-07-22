@@ -41,15 +41,14 @@ class Arr
         array $defaultDataForUpdate = [],
         array $additionalFieldsWithData = [],
     ): array {
-        $willBeUpdated = self::makePKForCollection($willBeUpdated, $by);
         $withDataFromCollection = self::makePKForCollection($withDataFromCollection, $by);
 
         $result = [];
 
-        foreach (array_keys($willBeUpdated) as $key) {
+        foreach ($willBeUpdated as $item) {
             $result[] = self::updateArrayByAnotherArray(
-                $willBeUpdated[$key],
-                $withDataFromCollection[$key] ?? $defaultDataForUpdate,
+                $item,
+                $withDataFromCollection[$by . $item[$by]] ?? $defaultDataForUpdate,
                 $additionalFieldsWithData,
             );
         }
