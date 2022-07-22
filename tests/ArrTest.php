@@ -30,7 +30,7 @@ class ArrTest extends TestCase
         self::assertEquals($result, Arr::updateArrayByAnotherArray($arrayA, $arrayB));
     }
 
-    public function testUpdateArrayByAnotherArrayAndAdditionalData(): void
+    public function testUpdateArrayByAnotherArrayAndAdditionalDataByFunction(): void
     {
         $arrayA = [
             'id' => 10,
@@ -55,6 +55,34 @@ class ArrTest extends TestCase
             'views' => 10,
             'clicks' => 3,
             'ctr' => 30,
+        ];
+
+        self::assertEquals($result, Arr::updateArrayByAnotherArray($arrayA, $arrayB, $additionalData));
+    }
+
+    public function testUpdateArrayByAnotherArrayAndAdditionalDataByStaticData(): void
+    {
+        $arrayA = [
+            'id' => 10,
+            'bannerName' => 'name10',
+            'views' => 10,
+        ];
+
+        $arrayB = [
+            'id' => 10,
+            'clicks' => 3,
+        ];
+
+        $additionalData = [
+            'ctr' => 100500,
+        ];
+
+        $result = [
+            'id' => 10,
+            'bannerName' => 'name10',
+            'views' => 10,
+            'clicks' => 3,
+            'ctr' => 100500,
         ];
 
         self::assertEquals($result, Arr::updateArrayByAnotherArray($arrayA, $arrayB, $additionalData));

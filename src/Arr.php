@@ -16,7 +16,10 @@ class Arr
 
         if ([] !== $additionalData) {
             foreach ($additionalData as $key => $value) {
-                $result[$key] = $value($willBeUpdated, $withDataFromArray);
+                $result[$key] = match (true) {
+                    is_callable($value) => $value($willBeUpdated, $withDataFromArray),
+                    default => $value,
+                };
             }
         }
 
